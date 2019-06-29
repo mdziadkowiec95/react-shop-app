@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Samsung Galaxy S9",
+      "price": 599,
+      "category": "phones",
+      "img": ""
+    },
+    {
+      "id": 2,
+      "name": "Sony Xperia Z4",
+      "price": 488,
+      "category": "phones",
+      "img": ""
+    },
+    {
+      "id": 3,
+      "name": "Xiaomi Mi 2",
+      "price": 1099,
+      "category": "phones",
+      "img": ""
+    },
+    {
+      "id": 4,
+      "name": "iPhone 8",
+      "price": 2410,
+      "category": "phones",
+      "img": ""
+    },
+    {
+      "id": 11,
+      "name": "MacBook Pro 13 - 2019",
+      "price": 599,
+      "category": "notebooks",
+      "img": ""
+    },
+    {
+      "id": 12,
+      "name": "MacBook Air 11 - 2018",
+      "price": 488,
+      "category": "notebooks",
+      "img": ""
+    },
+    {
+      "id": 13,
+      "name": "Lenovo x250 i3, 2.4gHz",
+      "price": 1099,
+      "category": "notebooks",
+      "img": ""
+    },
+    {
+      "id": 14,
+      "name": "Sony Vaio - 2019",
+      "price": 879,
+      "category": "notebooks",
+      "img": ""
+    },
+    {
+      "id": 31,
+      "name": "Samsung Galaxy Tab 10 - 2010",
+      "price": 599,
+      "category": "tablets",
+      "img": ""
+    },
+    {
+      "id": 32,
+      "name": "iPad Pro 12.9 - 2019",
+      "price": 488,
+      "category": "tablets",
+      "img": ""
+    },
+    {
+      "id": 33,
+      "name": "iPad Mini 2 - 2018",
+      "price": 1099,
+      "category": "tablets",
+      "img": ""
+    },
+    {
+      "id": 34,
+      "name": "Lenovo Yoga 14 - 2019",
+      "price": 2410,
+      "category": "tablets",
+      "img": ""
+    }
+  ]
+}

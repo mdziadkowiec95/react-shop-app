@@ -1,0 +1,32 @@
+{
+  "tablets": [
+    {
+      "id": 31,
+      "name": "Samsung Galaxy Tab 10 - 2010",
+      "price": 599,
+      "category": "tablets",
+      "img": ""
+    },
+    {
+      "id": 32,
+      "name": "iPad Pro 12.9 - 2019",
+      "price": 488,
+      "category": "tablets",
+      "img": ""
+    },
+    {
+      "id": 33,
+      "name": "iPad Mini 2 - 2018",
+      "price": 1099,
+      "category": "tablets",
+      "img": ""
+    },
+    {
+      "id": 34,
+      "name": "Lenovo Yoga 14 - 2019",
+      "price": 2410,
+      "category": "tablets",
+      "img": ""
+    }
+  ]
+}

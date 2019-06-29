@@ -1,0 +1,32 @@
+{
+  "notebooks": [
+    {
+      "id": 11,
+      "name": "MacBook Pro 13 - 2019",
+      "price": 599,
+      "category": "notebooks",
+      "img": ""
+    },
+    {
+      "id": 12,
+      "name": "MacBook Air 11 - 2018",
+      "price": 488,
+      "category": "notebooks",
+      "img": ""
+    },
+    {
+      "id": 13,
+      "name": "Lenovo x250 i3, 2.4gHz",
+      "price": 1099,
+      "category": "notebooks",
+      "img": ""
+    },
+    {
+      "id": 14,
+      "name": "Sony Vaio - 2019",
+      "price": 879,
+      "category": "notebooks",
+      "img": ""
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "phones": [
+    {
+      "id": 1,
+      "name": "Samsung Galaxy S9",
+      "price": 599,
+      "category": "phones",
+      "img": ""
+    },
+    {
+      "id": 2,
+      "name": "Sony Xperia Z4",
+      "price": 488,
+      "category": "phones",
+      "img": ""
+    },
+    {
+      "id": 3,
+      "name": "Xiaomi Mi 2",
+      "price": 1099,
+      "category": "phones",
+      "img": ""
+    },
+    {
+      "id": 4,
+      "name": "iPhone 8",
+      "price": 2410,
+      "category": "phones",
+      "img": ""
+    }
+  ]
+}
