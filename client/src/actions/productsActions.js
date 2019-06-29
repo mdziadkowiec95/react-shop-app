@@ -23,17 +23,26 @@ export const fetchProducts = category => dispatch => {
 
   const query = category !== 'all' ? category : 'products';
 
-  return axios
-    .get(`/db/${query}.json`)
-    .then(json => {
-      const res = json.data[query];
+  return axios({
+    method: 'GET',
+    url: `/api/products`,
+    headers: {
+      contentType: 'application/json'
+    }
+  })
 
-      setTimeout(
-        () => dispatch(fetchProductsSuccess(res)),
-        500,
-      ); /** setTimeout to simulate loading */
+    .then(res => {
+      const products = res.data
+      console.log(res.data);
+      dispatch(fetchProductsSuccess(products));
+      // const res = json.data[query];
 
-      return res;
+      // setTimeout(
+      //   () => ),
+      //   500,
+      // ); /** setTimeout to simulate loading */
+      console.log(products);
+      return products;
     })
     .catch(error => dispatch(fetchProductsFailure(error)));
 };

@@ -16,28 +16,26 @@ export default (state = initialState, action) => {
           items: state.items.map((item, index) => {
             if (index === targetIndex) {
               return { ...item, count: item.count + 1 };
-            } 
-              return {
-                ...item,
-                count: item.count,
-              };
-            
+            }
+            return {
+              ...item,
+              count: item.count,
+            };
           }),
         };
-      } 
-        return {
-          ...state,
-          items: [
-            ...state.items,
-            {
-              id: action.payload.id,
-              name: action.payload.name,
-              price: action.payload.price,
-              count: 1,
-            },
-          ],
-        };
-      
+      }
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          {
+            id: action.payload.id,
+            name: action.payload.name,
+            price: action.payload.price,
+            count: 1,
+          },
+        ],
+      };
 
     case 'REMOVE_FROM_BASKET':
       return {
@@ -56,9 +54,8 @@ export default (state = initialState, action) => {
               ...item,
               count: newCount < 1 ? 1 : newCount,
             };
-          } 
-            return item;
-          
+          }
+          return item;
         }),
       };
 

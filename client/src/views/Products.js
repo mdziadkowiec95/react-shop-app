@@ -25,7 +25,7 @@ class Products extends React.Component {
         <h1>Products list</h1>
         <GridTemplate>
           {products.length > 0 &&
-            products.map((product, index) => <Card key={product.id} {...product} />)}
+            products.map((product, index) => <Card key={product._id} {...product} />)}
         </GridTemplate>
       </>
     );

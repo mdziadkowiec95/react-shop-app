@@ -39,18 +39,18 @@ class Card extends Component {
   handleAddToBasket = e => {
     e.preventDefault();
 
-    const { id, name, price, addToBasket } = this.props;
+    const { _id, name, price, addToBasket } = this.props;
 
-    addToBasket(id, name, price);
+    addToBasket(_id, name, price);
   };
 
   render() {
-    const { id, name, price, category, img } = this.props;
-    const productImg = img || productImgPlaceholder;
+    const { _id, name, price, category, image } = this.props;
+    const productImg = image || productImgPlaceholder;
 
     return (
       <StyledWrapper>
-        <StyledImage src={productImg} alt={`${name} - ${category}`} />
+        <StyledImage src={`/${productImg}`} alt={`${name} - ${category}`} />
         <h3>{name}</h3>
         <p>{price}$</p>
         <p>{category}</p>
@@ -58,7 +58,7 @@ class Card extends Component {
           <StyledButton secondary flex={1} onClick={e => this.handleAddToBasket(e)}>
             Add to basekt
           </StyledButton>
-          <StyledButton secondary flex={1} as={Link} to={`${category}/${id}`}>
+          <StyledButton secondary flex={1} as={Link} to={`${category}/${_id}`}>
             More info
           </StyledButton>
         </StyledButtonGroup>
