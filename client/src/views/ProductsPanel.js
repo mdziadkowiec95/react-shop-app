@@ -14,13 +14,12 @@ const StyledInput = styled.input`
   font-size: 16px;
 `;
 
-
 /** Generate last ten years array */
 const lastTenYears = [];
 
 for (let i = 0; i < 10; i += 1) {
   lastTenYears.push(new Date().getFullYear() - i);
-};
+}
 
 class ProductsPanel extends Component {
   state = {
@@ -30,10 +29,10 @@ class ProductsPanel extends Component {
       price: '',
       category: '',
       image: '',
-    }
+    },
   };
 
-  handleAddProduct = (e) => {
+  handleAddProduct = e => {
     e.preventDefault();
     const image = this.fileUpload.files[0];
     console.log(image.type, image);
@@ -57,35 +56,62 @@ class ProductsPanel extends Component {
     req.then(res => console.log(res.data)).catch(err => console.log(err));
   };
 
-  handleFieldChange = (e) => {
+  handleFieldChange = e => {
     const { target } = e;
 
-    this.setState((state) => ({
+    this.setState(state => ({
       formData: {
         ...state.formData,
-        [target.name]: target.value
-      }
+        [target.name]: target.value,
+      },
     }));
-  }
+  };
 
   render() {
     return (
       <div>
         <h1>Products panel</h1>
         <StyledForm action="" method="POST">
-          <StyledInput onChange={this.handleFieldChange} type="text" placeholder="name" name="name" value={this.state.formData.name} />
-          <StyledInput onChange={this.handleFieldChange} type="text" placeholder="name" name="price" value={this.state.formData.price} />
-          <StyledInput onChange={this.handleFieldChange} type="text" placeholder="name" name="category" value={this.state.formData.category} />
-          <StyledInput ref={(ref) => this.fileUpload = ref} type="file" placeholder="name" name="image" />
+          <StyledInput
+            onChange={this.handleFieldChange}
+            type="text"
+            placeholder="name"
+            name="name"
+            value={this.state.formData.name}
+          />
+          <StyledInput
+            onChange={this.handleFieldChange}
+            type="text"
+            placeholder="name"
+            name="price"
+            value={this.state.formData.price}
+          />
+          <StyledInput
+            onChange={this.handleFieldChange}
+            type="text"
+            placeholder="name"
+            name="category"
+            value={this.state.formData.category}
+          />
+          <StyledInput
+            ref={ref => (this.fileUpload = ref)}
+            type="file"
+            placeholder="name"
+            name="image"
+          />
           <select name="year">
-            {lastTenYears.map(year => <option value={year}>{year}</option>)}
+            {lastTenYears.map(year => (
+              <option value={year}>{year}</option>
+            ))}
           </select>
           <textarea name="description" rows="5"></textarea>
-          <button type="submit" onClick={this.handleAddProduct}>Add product</button>
+          <button type="submit" onClick={this.handleAddProduct}>
+            Add product
+          </button>
         </StyledForm>
       </div>
-    )
+    );
   }
-};
+}
 
 export default ProductsPanel;

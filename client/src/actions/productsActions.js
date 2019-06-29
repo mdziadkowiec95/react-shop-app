@@ -27,12 +27,11 @@ export const fetchProducts = category => dispatch => {
     method: 'GET',
     url: `/api/products`,
     headers: {
-      contentType: 'application/json'
-    }
+      contentType: 'application/json',
+    },
   })
-
     .then(res => {
-      const products = res.data
+      const products = res.data;
       console.log(res.data);
       dispatch(fetchProductsSuccess(products));
       // const res = json.data[query];
