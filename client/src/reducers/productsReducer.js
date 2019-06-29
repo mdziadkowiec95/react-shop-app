@@ -4,8 +4,6 @@ import {
   FETCH_PRODUCTS_FAILURE,
 } from 'actions/productsActions';
 
-
-
 const initialState = {
   items: [
     // {
@@ -30,7 +28,7 @@ const initialState = {
     // }
   ],
   loading: false,
-  error: null
+  error: null,
 };
 
 export default function productReducer(state = initialState, action) {
@@ -41,7 +39,7 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
 
     case FETCH_PRODUCTS_SUCCESS:
@@ -50,7 +48,7 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        items: action.payload.products
+        items: action.payload.products,
       };
 
     case FETCH_PRODUCTS_FAILURE:
@@ -65,7 +63,7 @@ export default function productReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload.error,
-        items: []
+        items: [],
       };
 
     default:

@@ -4,7 +4,7 @@ const routes = {
   productsAll: '/products/all',
   productsCategory: '/products/:category',
   productDetailPage: '/products/:category/:id',
-  basket: '/basket'
+  basket: '/basket',
 };
 
 export default routes;

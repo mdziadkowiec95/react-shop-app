@@ -1,23 +1,23 @@
 export const addToBasket = (id, name, price) => ({
-  type: "ADD_TO_BASKET",
+  type: 'ADD_TO_BASKET',
   payload: {
     id,
     name,
-    price
-  }
+    price,
+  },
 });
 
 export const removeFromBasket = id => ({
-  type: "REMOVE_FROM_BASKET",
+  type: 'REMOVE_FROM_BASKET',
   payload: {
-    id
-  }
+    id,
+  },
 });
 
 export const changeAmount = (id, value) => ({
-  type: "CHANGE_AMOUNT",
+  type: 'CHANGE_AMOUNT',
   payload: {
     id,
-    value
-  }
+    value,
+  },
 });

@@ -1,9 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import Card from "components/molecules/Card/Card";
+import React from 'react';
+import { connect } from 'react-redux';
+import Card from 'components/molecules/Card/Card';
 import { fetchProducts } from 'actions/productsActions';
 // import ContentTemplate from 'templates/ContentTemplate';
-import GridTemplate from 'templates/GridTemplate'
+import GridTemplate from 'templates/GridTemplate';
 
 class Products extends React.Component {
   componentDidMount() {
@@ -34,11 +34,10 @@ class Products extends React.Component {
 
 // const mapStateToProps = ({ products }) => ({ products });
 
-
 const mapStateToProps = state => ({
   products: state.products.items,
   loading: state.products.loading,
-  error: state.products.error
+  error: state.products.error,
 });
 
 export default connect(mapStateToProps)(Products);

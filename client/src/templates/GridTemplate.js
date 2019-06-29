@@ -12,9 +12,7 @@ const StyledGrid = styled.div`
 
 const GridTemplate = ({ children }) => (
   <ContentTemplate>
-    <StyledGrid>
-      {children}
-    </StyledGrid>
+    <StyledGrid>{children}</StyledGrid>
   </ContentTemplate>
 );
 

@@ -21,4 +21,3 @@ export const theme = {
     xl: '4rem',
   },
 };
-

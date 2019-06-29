@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 import ContentTemplate from 'templates/ContentTemplate';
-import { MdShoppingCart } from 'react-icons/md'
+import { MdShoppingCart } from 'react-icons/md';
 import { basketIconPopIn } from 'styles/KeyFrames';
 
 const StyledNavList = styled.ul`
@@ -21,10 +21,11 @@ const StyledNavLink = styled(NavLink)`
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   text-decoration: none;
 
-  ${({ animate }) => animate && css`
-    animation: ${basketIconPopIn} 1s;
-  `}
-  
+  ${({ animate }) =>
+    animate &&
+    css`
+      animation: ${basketIconPopIn} 1s;
+    `}
 `;
 
 const StyledBasketItem = styled.li`
@@ -37,9 +38,7 @@ const StyledBasketItem = styled.li`
   color: ${({ theme }) => theme.white};
 `;
 
-const StyledBasketCounter = styled.span`
-
-`;
+const StyledBasketCounter = styled.span``;
 
 class Navigation extends Component {
   state = {
@@ -66,24 +65,16 @@ class Navigation extends Component {
               </StyledNavLink>
             </StyledNavItem>
             <StyledNavItem>
-              <StyledNavLink to="/products/all">
-                Products
-              </StyledNavLink>
+              <StyledNavLink to="/products/all">Products</StyledNavLink>
             </StyledNavItem>
             <StyledNavItem>
-              <StyledNavLink to="/products/phones">
-                Phones
-              </StyledNavLink>
+              <StyledNavLink to="/products/phones">Phones</StyledNavLink>
             </StyledNavItem>
             <StyledNavItem>
-              <StyledNavLink to="/products/tablets">
-                Tablets
-             </StyledNavLink>
+              <StyledNavLink to="/products/tablets">Tablets</StyledNavLink>
             </StyledNavItem>
             <StyledNavItem>
-              <StyledNavLink to="/products/notebooks">
-                Notebooks
-            </StyledNavLink>
+              <StyledNavLink to="/products/notebooks">Notebooks</StyledNavLink>
             </StyledNavItem>
             <StyledBasketItem>
               <StyledNavLink
@@ -98,8 +89,7 @@ class Navigation extends Component {
           </StyledNavList>
         </nav>
       </ContentTemplate>
-
-    )
+    );
   }
 }
 
@@ -107,7 +97,7 @@ const mapStateToProps = ({ basket: { items } }) => {
   return {
     basketItemsNumber: items.reduce((total, cur) => {
       return total + cur.count;
-    }, 0)
+    }, 0),
   };
 };
 
