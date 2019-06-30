@@ -57,7 +57,6 @@ router.get('/', (req, res) => {
 router.post('', upload.single('image'), (req, res) => {
   console.log(req.file);
 
-
   const newProduct = new Product({
     name: req.body.name,
     price: req.body.price,
@@ -78,6 +77,16 @@ router.post('', upload.single('image'), (req, res) => {
           image: product.image
         }
       })
+
+
+      /** automaticly remove item after 30 seconds */
+      // setTimeout(() => {
+      //   Product.findById(product._id)
+      //     .then(product => product.remove()) 
+      // }, 30000);
+
+
+
     }).catch(err => {
 
       res.status(404).json({
@@ -85,26 +94,7 @@ router.post('', upload.single('image'), (req, res) => {
         err
       })
     });
-
-  // newProduct.img.data = fs.readFileSync(req.file.path)
-  // newProduct.img.contentType = 'image/jpeg';
-  // newProduct.save();
-  // res.json({ message: 'New image added to the db!' });
 });
-
-
-// const newProduct = new Product({
-//   name: req.body.name,
-//   price: req.body.price,
-//   category: req.body.category,
-//   img: {
-//     data: fs.readFileSync(req.files.productImage.path),
-//     contentType: 'image/jpg',
-//   }
-// });
-
-// newProduct.save().then(product => res.json(product));
-// });
 
 
 /** 

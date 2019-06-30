@@ -77,7 +77,7 @@ class Navigation extends Component {
               <StyledNavLink to="/products/notebooks">Notebooks</StyledNavLink>
             </StyledNavItem>
             <StyledNavItem>
-              <StyledNavLink to="/products-panel">Products Panel</StyledNavLink>
+              <StyledNavLink to="/products-panel">Products panel</StyledNavLink>
             </StyledNavItem>
             <StyledBasketItem>
               <StyledNavLink
