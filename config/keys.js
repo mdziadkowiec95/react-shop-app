@@ -1,7 +1,9 @@
 const dotenv = require('dotenv').config();
 
 const password = process.env.MONGO_DB_PASSWORD;
+const user = process.env.MONGO_DB_USER;
+const address = process.env.MONGO_DB_URI;
 
 module.exports = {
-  mongoURI: `mongodb+srv://admin:${password}@react-shop-app-7p7rr.mongodb.net/test?retryWrites=true&w=majority`,
+  mongoURI: `mongodb+srv://${user}:${password}@${address}`
 };
