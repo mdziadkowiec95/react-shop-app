@@ -1,6 +1,8 @@
 export const theme = {
   primary: 'hsl(198, 75%, 38%)',
   secondary: 'hsl(172, 62%, 50%)',
+  success: 'hsl(120, 88%, 25%)',
+  danger: 'hsl(1, 58%, 44%)',
   white: 'hsl(0, 0%, 100%)',
   grey100: 'hsl(0, 0%, 97%)',
   grey200: 'hsl(0, 0%, 83%)',
