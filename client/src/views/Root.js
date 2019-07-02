@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import routes from 'routes';
 import MainTemplate from 'templates/MainTemplate';
+import Order from 'views/Order';
 
 const Root = () => (
   <Provider store={store}>
@@ -21,6 +22,7 @@ const Root = () => (
           <Route path={routes.productDetailPage} component={DetailsPage} />
           <Route path={routes.productsPanel} component={ProductsPanel} />
           <Route path="/basket" component={Basket} />
+          <Route path="/order" component={Order} />
         </Switch>
       </MainTemplate>
     </BrowserRouter>

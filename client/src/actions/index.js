@@ -1,9 +1,10 @@
-export const addToBasket = (id, name, price) => ({
+export const addToBasket = (id, name, price, image) => ({
   type: 'ADD_TO_BASKET',
   payload: {
     id,
     name,
     price,
+    image,
   },
 });
 

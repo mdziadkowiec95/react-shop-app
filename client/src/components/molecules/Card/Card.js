@@ -39,9 +39,9 @@ class Card extends Component {
   handleAddToBasket = e => {
     e.preventDefault();
 
-    const { _id, name, price, addToBasket } = this.props;
+    const { _id, name, price, image, addToBasket } = this.props;
 
-    addToBasket(_id, name, price);
+    addToBasket(_id, name, price, image);
   };
 
   render() {
@@ -75,7 +75,7 @@ class Card extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addToBasket: (id, name, price) => dispatch(addToBasket(id, name, price)),
+  addToBasket: (id, name, price, image) => dispatch(addToBasket(id, name, price, image)),
 });
 
 export default connect(

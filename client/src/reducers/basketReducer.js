@@ -1,11 +1,33 @@
 const initialState = {
   items: [
-    { id: 1, name: "PS4", price: 123, count: 1 },
-    { id: 1, name: "PS4", price: 123, count: 1 },
-    { id: 1, name: "PS4", price: 123, count: 1 },
-    { id: 1, name: "PS4", price: 123, count: 1 },
-    { id: 1, name: "PS4", price: 123, count: 1 },
-    { id: 1, name: "PS4", price: 123, count: 1 },
+    {
+      id: '5d17ce23c16e1024cb895a68123',
+      name: 'Sony 7',
+      price: 100,
+      image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+      count: 1
+    },
+    {
+      id: '5d17ce23c16e1024cb895a681',
+      name: 'iPhone 7',
+      price: 1000,
+      image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+      count: 1
+    },
+    {
+      id: '5d17ce23c16e1024cb895a682',
+      name: 'Asus 7',
+      price: 500,
+      image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+      count: 1
+    },
+    {
+      id: '5d17ce23c16e1024cb895a683',
+      name: 'Produkt 7',
+      price: 799,
+      image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+      count: 1
+    }
   ],
 };
 
@@ -37,6 +59,7 @@ export default (state = initialState, action) => {
             id: action.payload.id,
             name: action.payload.name,
             price: action.payload.price,
+            image: action.payload.image,
             count: 1,
           },
         ],

@@ -8,6 +8,7 @@ import { MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 import { IoMdTrash } from 'react-icons/io';
 
 const StyledTable = styled(Table)`
+  min-height: 50px;
   margin-top: 50px;
   background-color: ${({ theme }) => theme.white};
   box-shadow: 0 0 10px ${({ theme }) => theme.grey200};
@@ -56,12 +57,17 @@ const EmptyBasketNote = styled.p`
   text-align: center;
 `;
 
+const StyledProductImage = styled.img`
+  max-width: 50px;
+`;
+
 
 const BasketTable = ({ items, removeFromBasket, changeAmount }) => (
   <>
     <StyledTable>
       <Thead>
         <StyledTr>
+          <StyledTh />
           <StyledTh>Name</StyledTh>
           <StyledTh>Price</StyledTh>
           <StyledTh>Count</StyledTh>
@@ -71,6 +77,9 @@ const BasketTable = ({ items, removeFromBasket, changeAmount }) => (
       <Tbody>
         {items && items.map(item => (
           <StyledTr key={`${item.name}-${item.id}`}>
+            <StyledTd>
+              <StyledProductImage src={item.image} />
+            </StyledTd>
             <StyledTd>{item.name}</StyledTd>
             <StyledTd>{item.price}</StyledTd>
             <StyledTd>
