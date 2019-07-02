@@ -21,18 +21,24 @@ export const fetchProductsFailure = error => ({
 export const fetchProducts = category => dispatch => {
   dispatch(fetchProductsBegin());
 
-  const query = category !== 'all' ? category : 'products';
+  const isNotSpecificCategory = category !== 'all';
 
-  return axios({
-    method: 'GET',
-    url: `/api/products`,
+  const reqUrl = isNotSpecificCategory ? `/api/products/category` : '/api/products';
+
+  const reqConfig = {
     headers: {
       contentType: 'application/json',
-    },
-  })
+    }
+  };
+
+  if (isNotSpecificCategory) reqConfig.params = { category };
+
+  console.log(reqUrl, reqConfig);
+
+  return axios.get(reqUrl, reqConfig)
     .then(res => {
       const products = res.data;
-      console.log(res.data);
+
       dispatch(fetchProductsSuccess(products));
       // const res = json.data[query];
 

@@ -39,12 +39,32 @@ const upload = multer({
  */
 
 router.get('/', (req, res) => {
+
   Product.find()
     .sort({ date: -1 })
     .then(products => {
+      // console.log(products);
       res.json(products);
     });
 });
+
+/**
+ * @route GET api/products/category
+ * @desc Get all products
+ * @access Public
+ */
+
+router.get('/category', (req, res) => {
+  Product.find({ category: req.query.category })
+    .sort({ date: -1 })
+    .then(products => {
+      res.json(products);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+});
+
 
 /**
  * @route POST api/items

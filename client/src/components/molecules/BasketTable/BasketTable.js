@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { removeFromBasket, changeAmount } from 'actions';
 import { MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 import { IoMdTrash } from 'react-icons/io';
-import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 
 const StyledTable = styled(Table)`
   margin-top: 50px;
@@ -55,7 +54,7 @@ const EmptyBasketNote = styled.p`
   margin-top: 30px;
   font-size: 20px;
   text-align: center;
-`
+`;
 
 
 const BasketTable = ({ items, removeFromBasket, changeAmount }) => (

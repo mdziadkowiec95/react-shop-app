@@ -1,11 +1,11 @@
 const initialState = {
   items: [
     { id: 1, name: "PS4", price: 123, count: 1 },
-    // { id: 1, name: "PS4", price: 123, count: 1 },
-    // { id: 1, name: "PS4", price: 123, count: 1 },
-    // { id: 1, name: "PS4", price: 123, count: 1 },
-    // { id: 1, name: "PS4", price: 123, count: 1 },
-    // { id: 1, name: "PS4", price: 123, count: 1 },
+    { id: 1, name: "PS4", price: 123, count: 1 },
+    { id: 1, name: "PS4", price: 123, count: 1 },
+    { id: 1, name: "PS4", price: 123, count: 1 },
+    { id: 1, name: "PS4", price: 123, count: 1 },
+    { id: 1, name: "PS4", price: 123, count: 1 },
   ],
 };
 

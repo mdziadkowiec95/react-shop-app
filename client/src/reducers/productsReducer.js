@@ -7,6 +7,50 @@ import {
 const initialState = {
   items: [
     // {
+    //   _id: '5d17ce23c16e1024cb895a68',
+    //   name: 'iPhone 7',
+    //   price: 799,
+    //   category: 'phones',
+    //   image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+    //   date: '2019-06-29T20:46:27.209Z',
+    //   createdAt: '2019-06-29T20:46:27.216Z',
+    //   updatedAt: '2019-06-29T20:46:27.216Z',
+    //   __v: 0
+    // },
+    // {
+    //   _id: '5d17ce23c16e1024cb895a68',
+    //   name: 'iPhone 7',
+    //   price: 799,
+    //   category: 'phones',
+    //   image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+    //   date: '2019-06-29T20:46:27.209Z',
+    //   createdAt: '2019-06-29T20:46:27.216Z',
+    //   updatedAt: '2019-06-29T20:46:27.216Z',
+    //   __v: 0
+    // },
+    // {
+    //   _id: '5d17ce23c16e1024cb895a68',
+    //   name: 'iPhone 7',
+    //   price: 799,
+    //   category: 'phones',
+    //   image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+    //   date: '2019-06-29T20:46:27.209Z',
+    //   createdAt: '2019-06-29T20:46:27.216Z',
+    //   updatedAt: '2019-06-29T20:46:27.216Z',
+    //   __v: 0
+    // },
+    // {
+    //   _id: '5d17ce23c16e1024cb895a68',
+    //   name: 'iPhone 7',
+    //   price: 799,
+    //   category: 'phones',
+    //   image: 'uploads/2019-06-29T20:46:27.199Ziphone8-product.jpg',
+    //   date: '2019-06-29T20:46:27.209Z',
+    //   createdAt: '2019-06-29T20:46:27.216Z',
+    //   updatedAt: '2019-06-29T20:46:27.216Z',
+    //   __v: 0
+    // }
+    // {
     //   id: 1,
     //   name: "PS4",
     //   price: 123
