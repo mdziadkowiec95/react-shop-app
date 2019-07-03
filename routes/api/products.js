@@ -4,7 +4,6 @@ const router = express.Router();
 const multer = require('multer');
 
 // Product model
-
 const Product = require('../../models/Product');
 
 const storage = multer.diskStorage({
@@ -33,35 +32,41 @@ const upload = multer({
 });
 
 /**
- * @route GET api/items
- * @desc Get all items
+ * @route GET api/products
+ * @desc Get all products
  * @access Public
  */
 
 router.get('/', (req, res) => {
-
   Product.find()
     .sort({ date: -1 })
-    .then(products => {
+    .then(fetchedProducts => {
       // console.log(products);
-      res.json(products);
+      res.json({
+        status: 'success',
+        fetchedProducts
+      });
     });
 });
 
 /**
  * @route GET api/products/category
- * @desc Get all products
+ * @desc Get all products by specific category
  * @access Public
  */
 
 router.get('/category', (req, res) => {
   Product.find({ category: req.query.category })
     .sort({ date: -1 })
-    .then(products => {
-      res.json(products);
+    .then(fetchedProducts => {
+      res.json({
+        status: 'success',
+        fetchedProducts
+      });
     })
     .catch(err => {
       console.log(err);
+      res.json('Error while fetching products by category');
     })
 });
 

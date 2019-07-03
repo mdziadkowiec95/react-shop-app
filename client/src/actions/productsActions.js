@@ -33,21 +33,13 @@ export const fetchProducts = category => dispatch => {
 
   if (isNotSpecificCategory) reqConfig.params = { category };
 
-  console.log(reqUrl, reqConfig);
-
   return axios.get(reqUrl, reqConfig)
     .then(res => {
-      const products = res.data;
+      const [fetchedProducts] = res.data;
 
-      dispatch(fetchProductsSuccess(products));
-      // const res = json.data[query];
+      dispatch(fetchProductsSuccess(fetchedProducts));
 
-      // setTimeout(
-      //   () => ),
-      //   500,
-      // ); /** setTimeout to simulate loading */
-      console.log(products);
-      return products;
+      return fetchedProducts;
     })
     .catch(error => dispatch(fetchProductsFailure(error)));
 };
