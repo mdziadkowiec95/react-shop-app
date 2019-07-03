@@ -35,7 +35,7 @@ export const fetchProducts = category => dispatch => {
 
   return axios.get(reqUrl, reqConfig)
     .then(res => {
-      const [fetchedProducts] = res.data;
+      const { fetchedProducts } = res.data;
 
       dispatch(fetchProductsSuccess(fetchedProducts));
 

@@ -9,6 +9,8 @@ export const theme = {
   grey300: 'hsl(0, 0%, 73%)',
   black: 'hsl(0, 0%, 0%)',
   black100: 'hsl(0, 0%, 6%)',
+  black200: 'hsl(0, 0%, 12%)',
+  black300: 'hsl(0, 0%, 20%)',
   fontWeight: {
     light: 300,
     regular: 400,

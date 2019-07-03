@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Button from 'components/atoms/Button/Button';
-import { MdAddCircle } from 'react-icons/md'
-import { FaQuestionCircle } from 'react-icons/fa'
+import { MdAddCircle } from 'react-icons/md';
+import { FaQuestionCircle } from 'react-icons/fa';
+import arrowLTRicon from 'assets/icons/arrowLTRicon.svg';
 // const DELIVERY_COSTS = {
 //   online: 20, // Pay online
 //   onDelivery: 30, // Cash on delivery
 //   inPerson: 0 // Pay and take your order in person
 // };
-
+ 
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -106,17 +107,12 @@ class BasketSummary extends Component {
             <StyledPlusIcon />
             <StyledLabel>Delivery Costs <StyledQuestionIcon /></StyledLabel>
           </StyledDetailRow>
-          <StyledButton as={Link} basketIsEmpty={!items.length > 0} onClick={this.handleOrderBtnClick} to="/order" secondary >Order</StyledButton>
+          <StyledButton icon={arrowLTRicon} as={Link} basketIsEmpty={!items.length > 0} onClick={this.handleOrderBtnClick} to="/order" secondary ><span>Order</span></StyledButton>
         </StyledSummaryBox>
       </StyledWrapper>
     )
   }
 };
 
-// const mapStateToProps = ({ basket: { productsCost } }) => {
-//   return {
-//     productsCost
-//   }
-// };
 
 export default BasketSummary;

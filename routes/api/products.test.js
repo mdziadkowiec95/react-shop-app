@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-// Testing the api
+// Testing products API routes
 
 const axios = require("axios");
 const port = 5000;
@@ -38,9 +38,6 @@ describe("Fetching Products", () => {
     });
   }
 
-  // testProductsWithCategory('phones');
-
   categories.forEach(category => testProductsWithCategory(category));
-
 
 });

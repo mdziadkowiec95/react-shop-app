@@ -34,6 +34,11 @@ const GlobalStyle = createGlobalStyle`
  ul {
    list-style: none;
  }
+
+ input {
+    outline: none;
+    border: none;
+ }
 `;
 
 export default GlobalStyle;

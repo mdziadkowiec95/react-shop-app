@@ -5,8 +5,12 @@ import { addToBasket } from 'actions';
 import styled from 'styled-components';
 import productImgPlaceholder from 'assets/images/iphone8-product.jpg';
 import Button from 'components/atoms/Button/Button';
+import addToBasketIcon from 'assets/icons/addToBasketIcon.svg';
+import infoIcon from 'assets/icons/infoIcon.svg';
 
 const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 20px;
   padding: 10px;
   border-radius: 20px;
@@ -16,23 +20,37 @@ const StyledWrapper = styled.div`
   transition: transform 0.25s;
 
   :hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 `;
 
 const StyledImage = styled.img`
   display: block;
   margin: 0 auto;
+  max-width: 250px;
+`;
+
+const StyledName = styled.h4`
+  margin-top: 10px;
+  font-size: ${({ theme }) => theme.fontSize.m};
+`;
+
+const StyledPrice = styled.p`
+
 `;
 
 const StyledButtonGroup = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: auto;
 `;
 
 const StyledButton = styled(Button)`
-  margin: 0 5px;
+  margin-top: 20px;
+
+  :first-child {
+    margin-right: 10px;
+  }
 `;
 
 class Card extends Component {
@@ -51,24 +69,17 @@ class Card extends Component {
     return (
       <StyledWrapper>
         <StyledImage src={`/${productImg}`} alt={`${name} - ${category}`} />
-        <h3>{name}</h3>
-        <p>{price}$</p>
-        <p>{category}</p>
+        <StyledName>{name}</StyledName>
+        <StyledPrice>{price}$</StyledPrice>
+        {/* <StyledCategory>{category}</p> */}
         <StyledButtonGroup>
-          <StyledButton secondary flex={1} onClick={e => this.handleAddToBasket(e)}>
-            Add to basekt
+          <StyledButton secondary flex={1} icon={addToBasketIcon} onClick={e => this.handleAddToBasket(e)}>
+            <span>Add to basekt</span>
           </StyledButton>
-          <StyledButton secondary flex={1} as={Link} to={`${category}/${_id}`}>
-            More info
+          <StyledButton secondary flex={1} icon={infoIcon} as={Link} to={`${category}/${_id}`}>
+            <span>More info</span>
           </StyledButton>
         </StyledButtonGroup>
-
-        {/* <Link to={`${category}/${id}`}>
-
-          <button>
-            More info
-          </button>
-        </Link> */}
       </StyledWrapper>
     );
   }

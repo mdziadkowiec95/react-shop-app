@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import TextField from 'components/atoms/TextField/TextField';
+import SelectField from 'components/atoms/SelectField/SelectField';
+import Button from 'components/atoms/Button/Button';
+import searchFileIcon from 'assets/icons/serachFileIcon.svg';
 
 const StyledForm = styled.form`
   display: flex;
@@ -9,10 +13,28 @@ const StyledForm = styled.form`
   margin: 30px auto;
 `;
 
-const StyledInput = styled.input`
-  padding: 10px;
-  font-size: 16px;
+const StyledUploadWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+
+  input[type=file] {
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    opacity: 0;
+    transform: translateX(-50%);
+    max-width: 230px;
+}
+  }
 `;
+
+const StyledUploadBtn = styled(Button)`
+  display: block;
+  margin: 0 auto 10px auto;
+`;
+
 
 /** Generate last ten years array */
 const lastTenYears = [];
@@ -28,7 +50,7 @@ class ProductsPanel extends Component {
       name: '',
       price: '',
       category: '',
-      image: '',
+      year: '',
     },
   };
 
@@ -72,38 +94,37 @@ class ProductsPanel extends Component {
       <div>
         <h1>Products panel</h1>
         <StyledForm action="" method="POST">
-          <StyledInput
-            onChange={this.handleFieldChange}
-            type="text"
-            placeholder="name"
-            name="name"
-            value={this.state.formData.name}
+          <TextField
+            onChangeFn={this.handleFieldChange}
+            inputName="Name"
+            inputValue={this.state.formData.name}
           />
-          <StyledInput
-            onChange={this.handleFieldChange}
-            type="text"
-            placeholder="name"
-            name="price"
-            value={this.state.formData.price}
+          <TextField
+            onChangeFn={this.handleFieldChange}
+            inputName="Price"
+            inputValue={this.state.formData.price}
           />
-          <StyledInput
-            onChange={this.handleFieldChange}
-            type="text"
-            placeholder="name"
-            name="category"
-            value={this.state.formData.category}
+          <TextField
+            onChangeFn={this.handleFieldChange}
+            inputName="Category"
+            inputValue={this.state.formData.category}
           />
-          <StyledInput
-            ref={ref => (this.fileUpload = ref)}
-            type="file"
-            placeholder="name"
-            name="image"
+          <StyledUploadWrapper class="upload-btn-wrapper">
+            <StyledUploadBtn secondary>Upload product image</StyledUploadBtn>
+            <input
+              ref={ref => (this.fileUpload = ref)}
+              type="file"
+              placeholder="name"
+              name="image"
+            />
+          </StyledUploadWrapper>
+
+          <SelectField 
+            onChangeFn={this.handleFieldChange}
+            selectName="year" 
+            selectPlaceholder="Select production year"
+            optionsArr={lastTenYears} 
           />
-          <select name="year">
-            {lastTenYears.map(year => (
-              <option value={year}>{year}</option>
-            ))}
-          </select>
           <textarea name="description" rows="5"></textarea>
           <button type="submit" onClick={this.handleAddProduct}>
             Add product
