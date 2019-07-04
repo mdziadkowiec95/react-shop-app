@@ -4,7 +4,8 @@ import axios from 'axios';
 import TextField from 'components/atoms/TextField/TextField';
 import SelectField from 'components/atoms/SelectField/SelectField';
 import Button from 'components/atoms/Button/Button';
-import searchFileIcon from 'assets/icons/serachFileIcon.svg';
+import productCategories from 'data/productCategories';
+import ProductAddList from 'components/molecules/ProductAddList/ProductAddList';
 
 const StyledForm = styled.form`
   display: flex;
@@ -26,7 +27,6 @@ const StyledUploadWrapper = styled.div`
     opacity: 0;
     transform: translateX(-50%);
     max-width: 230px;
-}
   }
 `;
 
@@ -36,43 +36,68 @@ const StyledUploadBtn = styled(Button)`
 `;
 
 
-/** Generate last ten years array */
-const lastTenYears = [];
-
-for (let i = 0; i < 10; i += 1) {
-  lastTenYears.push(new Date().getFullYear() - i);
-}
-
 class ProductsPanel extends Component {
   state = {
     products: [],
+    descriptionCurValue: '',
     formData: {
       name: '',
       price: '',
+      oldPrice: '',
       category: '',
-      year: '',
+      description: [], // Array of strings/paragraphs
+      bestFeatures: [
+        {
+          key: 1562275125125616,
+          label: "First",
+          value: "ome text"
+        },
+        {
+          key: 156227512412616,
+          label: "Second",
+          value: "ome text"
+        },
+        {
+          key: 156227562116,
+          label: "Third",
+          value: "Some text"
+        }
+      ], // Array pairs ex. ['Label', 'some feature text']
+      specifications: [], // Array pairs ex. ['Label', 'some specification text']
     },
   };
 
   handleAddProduct = e => {
     e.preventDefault();
-    const image = this.fileUpload.files[0];
-    console.log(image.type, image);
 
     const productData = new FormData();
 
     productData.append('name', this.state.formData.name);
     productData.append('price', this.state.formData.price);
+    productData.append('oldPrice', this.state.formData.price);
     productData.append('category', this.state.formData.category);
-    productData.append('image', this.fileUpload.files[0], this.fileUpload.files[0].name);
+    productData.append('description', this.state.formData.description);
+    productData.append('bestFeatures', this.state.formData.bestFeatures);
+    productData.append('specifications', this.state.formData.specifications);
+
+    const productImages = this.productImagesUpload.files;
+
+    // Add images to FormData object
+    for (let i = 0; i < productImages.length; i++) {
+      const imageFile = productImages[i];
+
+      productData.append('product_images', imageFile, imageFile.name);
+    }
 
     const req = axios({
       method: 'POST',
       url: '/api/products',
-      // headers: {
-      //   'Content-Type': 'multipart/form-data',
-      // },
-      data: productData,
+      headers: {
+        // 'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: productData
     });
 
     req.then(res => console.log(res.data)).catch(err => console.log(err));
@@ -89,6 +114,33 @@ class ProductsPanel extends Component {
     }));
   };
 
+  handleAddItem = (listType, value, label) => {
+    const newItem = {
+      key: Date.now(),
+      value
+    };
+
+    if (label) newItem.label = label;
+
+    this.setState(state => ({
+      formData: {
+        ...state.formData,
+        [listType]: [...state.formData[listType], newItem]
+      }
+    }));
+  }
+
+  handleRemoveItem = (e, listType, key) => {
+    e.preventDefault();
+
+    this.setState(state => ({
+      formData: {
+        ...state.formData,
+        [listType]: state.formData[listType].filter(item => item.key !== key)
+      }
+    }))
+  }
+
   render() {
     return (
       <div>
@@ -96,36 +148,68 @@ class ProductsPanel extends Component {
         <StyledForm action="" method="POST">
           <TextField
             onChangeFn={this.handleFieldChange}
-            inputName="Name"
+            inputName="name"
+            inputPlaceholder="Name"
             inputValue={this.state.formData.name}
           />
           <TextField
             onChangeFn={this.handleFieldChange}
-            inputName="Price"
+            inputName="price"
+            inputPlaceholder="Price"
             inputValue={this.state.formData.price}
           />
           <TextField
             onChangeFn={this.handleFieldChange}
-            inputName="Category"
-            inputValue={this.state.formData.category}
+            inputName="oldPrice"
+            inputPlaceholder="Old Price"
+            inputValue={this.state.formData.oldPrice}
           />
-          <StyledUploadWrapper class="upload-btn-wrapper">
-            <StyledUploadBtn secondary>Upload product image</StyledUploadBtn>
+
+          <SelectField
+            onChangeFn={this.handleFieldChange}
+            selectName="category"
+            selectPlaceholder="Select product category"
+            optionsArr={productCategories}
+          />
+
+          <StyledUploadWrapper>
+            <StyledUploadBtn secondary>Upload product images (max 3)</StyledUploadBtn>
             <input
-              ref={ref => (this.fileUpload = ref)}
+              ref={ref => (this.productImagesUpload = ref)}
               type="file"
               placeholder="name"
-              name="image"
+              name="product_images"
+              multiple
             />
           </StyledUploadWrapper>
 
-          <SelectField 
-            onChangeFn={this.handleFieldChange}
-            selectName="year" 
-            selectPlaceholder="Select production year"
-            optionsArr={lastTenYears} 
+          <ProductAddList
+            headingText="Best features"
+            listType="bestFeatures"
+            items={this.state.formData.bestFeatures}
+            addItemFn={this.handleAddItem}
+            removeItemFn={this.handleRemoveItem}
           />
-          <textarea name="description" rows="5"></textarea>
+
+          <ProductAddList
+            headingText="Specification data"
+            listType="specifications"
+            items={this.state.formData.specifications}
+            addItemFn={this.handleAddItem}
+            removeItemFn={this.handleRemoveItem}
+          />
+
+          <ProductAddList
+            headingText="Description"
+            listType="description"
+            items={this.state.formData.description}
+            addItemFn={this.handleAddItem}
+            removeItemFn={this.handleRemoveItem}
+          />
+
+
+
+
           <button type="submit" onClick={this.handleAddProduct}>
             Add product
           </button>

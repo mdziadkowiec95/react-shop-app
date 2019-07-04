@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 
 /** Create Schema */
 
+const arraySchema = new Schema({
+  value: String,
+  label: String
+});
+
 const ProductSchema = new Schema({
   name: {
     type: String,
@@ -12,15 +17,21 @@ const ProductSchema = new Schema({
     type: Number,
     required: true,
   },
+  oldPrice: {
+    type: Number,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
   },
-  image: {
-    type: String,
+  images: {
+    type: Array,
     required: true
   },
-
+  description: [arraySchema],
+  bestFeatures: [arraySchema],
+  specifications: [arraySchema],
   date: {
     type: Date,
     default: Date.now

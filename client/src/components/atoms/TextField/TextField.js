@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledField = styled.div`
   position: relative;
@@ -10,6 +11,13 @@ const StyledField = styled.div`
   position: relative;
   z-index: 1;
   box-shadow: 0 0 10px ${({ theme }) => theme.grey200};
+
+   ${({ size }) => size === 'small' && css`
+      ${StyledInput} {
+        padding: 5px 20px;
+        font-size: ${({ theme }) => theme.fontSize.s};
+      }
+  `}
 `;
 
 const StyledSpan = styled.span`
@@ -51,11 +59,22 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ onChangeFn, inputName, inputValue }) => (
-  <StyledField>
-    <StyledInput type="text" onChange={(e) => onChangeFn(e)} name={inputName.toLowerCase()} placeholder={inputName} value={inputValue} />
+const TextField = ({ onChangeFn, inputName, inputPlaceholder, inputValue, size }) => (
+  <StyledField size={size}>
+    <StyledInput small type="text" onChange={(e) => onChangeFn(e)} name={inputName} placeholder={inputPlaceholder ? inputPlaceholder : inputName} value={inputValue} />
     <StyledSpan className="span"></StyledSpan>
   </StyledField>
 );
 
-export default Input; 
+TextField.propTypes = {
+  onChangeFn: PropTypes.func.isRequired,
+  inputName: PropTypes.string.isRequired,
+  inputValue: PropTypes.string.isRequired,
+};
+
+TextField.defaultProps = {
+  inputName: '',
+  inputValue: ''
+};
+
+export default TextField; 

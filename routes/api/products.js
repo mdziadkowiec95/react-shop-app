@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 
+
 // Product model
 const Product = require('../../models/Product');
 
@@ -29,7 +30,7 @@ const upload = multer({
     fileSize: 1024 * 1024 * 5
   },
   fileFilter
-});
+}).array('product_images', 3);
 
 /**
  * @route GET api/products
@@ -77,33 +78,86 @@ router.get('/category', (req, res) => {
  * @access Public
  */
 
-router.post('', upload.single('image'), (req, res) => {
-  const newProduct = new Product({
-    name: req.body.name,
-    price: req.body.price,
-    category: req.body.category,
-    image: req.file.path
+router.post('', (req, res) => {
+  upload(req, res, function (err) {
+    // Prepare error message to send as response
+    const errorMessage = 'Something went wrong! Remember that you can upload max 3 images and only in .png or .jpg format';
+
+    if (err instanceof multer.MulterError) {
+      console.log(err);
+
+      res.json({
+        status: 'failed',
+        message: errorMessage
+      });
+    } else if (err) {
+      // An unknown error occurred when uploading.
+      console.log(err);
+
+      res.json({
+        status: 'failed',
+        message: errorMessage
+      });
+    }
+
+    // Everything went fine.
+
+    console.log(req.body.specifications);
+    console.log(req.body.bestFeatures);
+    res.json(req.body.bestFeatures)
+
+    const newProduct = new Product({
+      name: req.body.name,
+      price: req.body.price,
+      oldPrice: req.body.oldPrice,
+      category: req.body.category,
+      images: req.files.map(file => file.path),
+      description: req.body.description,
+      bestFeatures: req.body.bestFeatures,
+      specifications: req.body.specifications
+    });
+
+    console.log({
+      name: req.body.name,
+      price: req.body.price,
+      oldPrice: req.body.oldPrice,
+      category: req.body.category,
+      images: req.files.map(file => file.path),
+      description: req.body.description,
+      bestFeatures: req.body.bestFeatures,
+      specifications: req.body.specifications
+    });
+
+
+    // newProduct
+    //   .save()
+    //   .then(product => {
+    //     res.status(201).json({
+    //       message: 'Product created with success',
+    //       createdProduct: {
+    //         name: product.name,
+    //         price: product.price,
+    //         oldPrice: product.oldPrice,
+    //         category: product.category,
+    //         images: product.images,
+    //         description: product.description,
+    //         bestFeatures: product.bestFeatures,
+    //         specifications: product.specifications
+    //       }
+    //     });
+    //   })
+    //   .catch(err => {
+    //     res.json({
+    //       message: 'Error while adding a new product',
+    //       err
+    //     });
+    //   });
+
   });
 
-  newProduct
-    .save()
-    .then(product => {
-      res.status(201).json({
-        message: 'Product created with success',
-        createdProduct: {
-          name: product.name,
-          price: product.price,
-          category: product.category,
-          image: product.image
-        }
-      });
-    })
-    .catch(err => {
-      res.status(404).json({
-        message: 'Error while adding a new product',
-        err
-      });
-    });
+
+
+
 });
 
 /**
