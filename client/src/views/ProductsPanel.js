@@ -49,18 +49,18 @@ class ProductsPanel extends Component {
       bestFeatures: [
         {
           key: 1562275125125616,
-          label: "First",
-          value: "ome text"
+          value: "ome text",
+          label: "First"
         },
         {
           key: 156227512412616,
-          label: "Second",
-          value: "ome text"
+          value: "ome text",
+          label: "Second"
         },
         {
           key: 156227562116,
-          label: "Third",
-          value: "Some text"
+          value: "Some text",
+          label: "Third"
         }
       ], // Array pairs ex. ['Label', 'some feature text']
       specifications: [], // Array pairs ex. ['Label', 'some specification text']
@@ -72,13 +72,23 @@ class ProductsPanel extends Component {
 
     const productData = new FormData();
 
-    productData.append('name', this.state.formData.name);
-    productData.append('price', this.state.formData.price);
-    productData.append('oldPrice', this.state.formData.price);
-    productData.append('category', this.state.formData.category);
-    productData.append('description', this.state.formData.description);
-    productData.append('bestFeatures', this.state.formData.bestFeatures);
-    productData.append('specifications', this.state.formData.specifications);
+    // productData.append('name', this.state.formData.name);
+    // productData.append('price', this.state.formData.price);
+    // productData.append('oldPrice', this.state.formData.oldPrice);
+    // productData.append('category', this.state.formData.category);
+    // productData.append('description', JSON.stringify(this.state.formData.description));
+    // productData.append('bestFeatures', JSON.stringify(this.state.formData.bestFeatures));
+    // productData.append('specifications', JSON.stringify(this.state.formData.specifications));
+
+
+    // Object.keys(this.state.formData)
+    for (const prop in this.state.formData) {
+      if (Array.isArray(this.state.formData[prop])) {
+        productData.append(prop, JSON.stringify(this.state.formData[prop]));
+      } else {
+        productData.append(prop, this.state.formData[prop]);
+      }
+    }
 
     const productImages = this.productImagesUpload.files;
 

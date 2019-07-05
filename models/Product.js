@@ -3,10 +3,7 @@ const Schema = mongoose.Schema;
 
 /** Create Schema */
 
-const arraySchema = new Schema({
-  value: String,
-  label: String
-});
+// const arraySchema = new Schema();
 
 const ProductSchema = new Schema({
   name: {
@@ -29,9 +26,32 @@ const ProductSchema = new Schema({
     type: Array,
     required: true
   },
-  description: [arraySchema],
-  bestFeatures: [arraySchema],
-  specifications: [arraySchema],
+  description: [{
+    value: {
+      type: String,
+      required: true
+    },
+  }],
+  bestFeatures: [{
+    label: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
+    },
+  }],
+  specifications: [{
+    label: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
+    },
+  }],
   date: {
     type: Date,
     default: Date.now

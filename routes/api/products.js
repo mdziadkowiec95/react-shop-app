@@ -102,9 +102,16 @@ router.post('', (req, res) => {
 
     // Everything went fine.
 
-    console.log(req.body.specifications);
-    console.log(req.body.bestFeatures);
-    res.json(req.body.bestFeatures)
+    // res.json({
+    //   name: req.body.name,
+    //   price: req.body.price,
+    //   oldPrice: req.body.oldPrice,
+    //   category: req.body.category,
+    //   images: req.files.map(file => file.path),
+    //   description: req.body.description,
+    //   bestFeatures: req.body.bestFeatures,
+    //   specifications: req.body.specifications
+    // })
 
     const newProduct = new Product({
       name: req.body.name,
@@ -112,9 +119,9 @@ router.post('', (req, res) => {
       oldPrice: req.body.oldPrice,
       category: req.body.category,
       images: req.files.map(file => file.path),
-      description: req.body.description,
-      bestFeatures: req.body.bestFeatures,
-      specifications: req.body.specifications
+      description: JSON.parse(req.body.description),
+      bestFeatures: JSON.parse(req.body.bestFeatures),
+      specifications: JSON.parse(req.body.specifications)
     });
 
     console.log({
@@ -129,29 +136,29 @@ router.post('', (req, res) => {
     });
 
 
-    // newProduct
-    //   .save()
-    //   .then(product => {
-    //     res.status(201).json({
-    //       message: 'Product created with success',
-    //       createdProduct: {
-    //         name: product.name,
-    //         price: product.price,
-    //         oldPrice: product.oldPrice,
-    //         category: product.category,
-    //         images: product.images,
-    //         description: product.description,
-    //         bestFeatures: product.bestFeatures,
-    //         specifications: product.specifications
-    //       }
-    //     });
-    //   })
-    //   .catch(err => {
-    //     res.json({
-    //       message: 'Error while adding a new product',
-    //       err
-    //     });
-    //   });
+    newProduct
+      .save()
+      .then(product => {
+        res.status(201).json({
+          message: 'Product created with success',
+          createdProduct: {
+            name: product.name,
+            price: product.price,
+            oldPrice: product.oldPrice,
+            category: product.category,
+            images: product.images,
+            description: product.description,
+            bestFeatures: product.bestFeatures,
+            specifications: product.specifications
+          }
+        });
+      })
+      .catch(err => {
+        res.json({
+          message: 'Error while adding a new product',
+          err
+        });
+      });
 
   });
 

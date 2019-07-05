@@ -24,17 +24,17 @@ const StyledSelect = styled.select`
 
 const SelectField = ({ onChangeFn, optionsArr, selectName, selectedOptionIndex, selectPlaceholder }) => (
   <StyledWrapper>
-  <StyledSelect onChange={(e) => onChangeFn(e)} name={selectName}>
-    <option disabled selected>{selectPlaceholder}</option>;
+    <StyledSelect onChange={(e) => onChangeFn(e)} name={selectName}>
+      <option disabled selected>{selectPlaceholder}</option>;
     {optionsArr.map((item, index) => {
-      if (index === selectedOptionIndex) {
-        return <option value={item} selected>{item}</option>;
-      } else {
-        return <option value={item}>{item}</option>;
+        if (index === selectedOptionIndex) {
+          return <option key={index} value={item} selected>{item}</option>;
+        } else {
+          return <option key={index} value={item}>{item}</option>;
+        }
       }
-    }
-    )}
-  </StyledSelect>
+      )}
+    </StyledSelect>
   </StyledWrapper>
 );
 
