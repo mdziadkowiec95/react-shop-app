@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addToBasket } from 'actions';
-import styled from 'styled-components';
-import productImgPlaceholder from 'assets/images/iphone8-product.jpg';
+import { addToBasket } from 'actions/basketActions';
+import styled, { css } from 'styled-components';
 import Button from 'components/atoms/Button/Button';
 import addToBasketIcon from 'assets/icons/addToBasketIcon.svg';
 import infoIcon from 'assets/icons/infoIcon.svg';
 
+import productImgPlaceholder from 'assets/images/iphone8-product.jpg';
+
 const StyledWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 20px;
@@ -36,7 +38,11 @@ const StyledName = styled.h4`
 `;
 
 const StyledPrice = styled.p`
-
+  
+  ${({ old }) => old && css`
+    text-decoration: line-through;
+    color: ${({ theme }) => theme.grey300};
+  `}
 `;
 
 const StyledButtonGroup = styled.div`
@@ -53,25 +59,54 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const StyledOnSaleLabel = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.white};
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+`;
+
 class Card extends Component {
+  state = {
+    onSale: false
+  };
+
+  componentDidMount() {
+    const { price, oldPrice } = this.props;
+    console.log(price, oldPrice);
+
+    if (oldPrice && price < oldPrice) {
+      this.setState({ onSale: true });
+    }
+  }
+
   handleAddToBasket = e => {
     e.preventDefault();
 
-    const { _id, name, price, image, addToBasket } = this.props;
+    const { _id, name, price, mainImage, addToBasket } = this.props;
 
-    addToBasket(_id, name, price, image);
+    addToBasket(_id, name, price, mainImage);
   };
 
   render() {
-    const { _id, name, price, category, image } = this.props;
-    const productImg = image || productImgPlaceholder;
+    const { _id, name, price, oldPrice, category, manufacturer, mainImage } = this.props;
+    const { onSale } = this.state;
+    const productImg = mainImage || productImgPlaceholder;
 
     return (
       <StyledWrapper>
+        {onSale && <StyledOnSaleLabel>SALE</StyledOnSaleLabel>}
         <StyledImage src={`/${productImg}`} alt={`${name} - ${category}`} />
         <StyledName>{name}</StyledName>
-        <StyledPrice>{price}$</StyledPrice>
-        {/* <StyledCategory>{category}</p> */}
+        <StyledPrice>
+          {oldPrice && <StyledPrice old>{oldPrice}$</StyledPrice>}
+          {price}$
+        </StyledPrice>
+        <p>{category}</p>
+        <p>{manufacturer}</p>
         <StyledButtonGroup>
           <StyledButton secondary flex={1} icon={addToBasketIcon} onClick={e => this.handleAddToBasket(e)}>
             <span>Add to basekt</span>

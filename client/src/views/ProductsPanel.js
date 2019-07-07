@@ -22,7 +22,7 @@ const StyledUploadWrapper = styled.div`
   input[type=file] {
     height: 40px;
     position: absolute;
-    left: 50%;
+    left: 50%; 
     top: 0;
     opacity: 0;
     transform: translateX(-50%);
@@ -39,30 +39,14 @@ const StyledUploadBtn = styled(Button)`
 class ProductsPanel extends Component {
   state = {
     products: [],
-    descriptionCurValue: '',
     formData: {
       name: '',
       price: '',
       oldPrice: '',
       category: '',
+      manufacturer: '',
       description: [], // Array of strings/paragraphs
-      bestFeatures: [
-        {
-          key: 1562275125125616,
-          value: "ome text",
-          label: "First"
-        },
-        {
-          key: 156227512412616,
-          value: "ome text",
-          label: "Second"
-        },
-        {
-          key: 156227562116,
-          value: "Some text",
-          label: "Third"
-        }
-      ], // Array pairs ex. ['Label', 'some feature text']
+      bestFeatures: [], // Array pairs ex. ['Label', 'some feature text']
       specifications: [], // Array pairs ex. ['Label', 'some specification text']
     },
   };
@@ -70,33 +54,30 @@ class ProductsPanel extends Component {
   handleAddProduct = e => {
     e.preventDefault();
 
+    const { formData } = this.state;
+
     const productData = new FormData();
 
-    // productData.append('name', this.state.formData.name);
-    // productData.append('price', this.state.formData.price);
-    // productData.append('oldPrice', this.state.formData.oldPrice);
-    // productData.append('category', this.state.formData.category);
-    // productData.append('description', JSON.stringify(this.state.formData.description));
-    // productData.append('bestFeatures', JSON.stringify(this.state.formData.bestFeatures));
-    // productData.append('specifications', JSON.stringify(this.state.formData.specifications));
-
-
-    // Object.keys(this.state.formData)
-    for (const prop in this.state.formData) {
-      if (Array.isArray(this.state.formData[prop])) {
-        productData.append(prop, JSON.stringify(this.state.formData[prop]));
-      } else {
-        productData.append(prop, this.state.formData[prop]);
+    // append formData from component state to FormData object
+    for (const prop in formData) {
+      if (formData.hasOwnProperty(prop)) {
+        if (Array.isArray(formData[prop])) {
+          productData.append(prop, JSON.stringify(formData[prop]));
+        } else {
+          productData.append(prop, formData[prop]);
+        }
       }
     }
 
-    const productImages = this.productImagesUpload.files;
+    productData.append('productMainImage', this.productMainImageUpload.files[0]);
 
-    // Add images to FormData object
-    for (let i = 0; i < productImages.length; i++) {
-      const imageFile = productImages[i];
+    // Append images to FormData object
+    const productMoreImages = this.productMoreImagesUpload.files;
 
-      productData.append('product_images', imageFile, imageFile.name);
+    for (let i = 0; i < productMoreImages.length; i++) {
+      const imageFile = productMoreImages[i];
+
+      productData.append('productMoreImages', imageFile, imageFile.name);
     }
 
     const req = axios({
@@ -123,6 +104,10 @@ class ProductsPanel extends Component {
       },
     }));
   };
+
+  handleFileInputChange = e => {
+    console.log(e.target.files);
+  }
 
   handleAddItem = (listType, value, label) => {
     const newItem = {
@@ -174,6 +159,12 @@ class ProductsPanel extends Component {
             inputPlaceholder="Old Price"
             inputValue={this.state.formData.oldPrice}
           />
+          <TextField
+            onChangeFn={this.handleFieldChange}
+            inputName="manufacturer"
+            inputPlaceholder="Manufacturer"
+            inputValue={this.state.formData.manufacturer}
+          />
 
           <SelectField
             onChangeFn={this.handleFieldChange}
@@ -183,13 +174,23 @@ class ProductsPanel extends Component {
           />
 
           <StyledUploadWrapper>
+            <StyledUploadBtn secondary>Upload product main image</StyledUploadBtn>
+            <input
+              ref={ref => (this.productMainImageUpload = ref)}
+              type="file"
+              name="productMainImage"
+              onChange={this.handleFileInputChange}
+            />
+          </StyledUploadWrapper>
+
+          <StyledUploadWrapper>
             <StyledUploadBtn secondary>Upload product images (max 3)</StyledUploadBtn>
             <input
-              ref={ref => (this.productImagesUpload = ref)}
+              ref={ref => (this.productMoreImagesUpload = ref)}
               type="file"
-              placeholder="name"
-              name="product_images"
+              name="productMoreImages"
               multiple
+              onChange={this.handleFileInputChange}
             />
           </StyledUploadWrapper>
 
@@ -216,10 +217,6 @@ class ProductsPanel extends Component {
             addItemFn={this.handleAddItem}
             removeItemFn={this.handleRemoveItem}
           />
-
-
-
-
           <button type="submit" onClick={this.handleAddProduct}>
             Add product
           </button>

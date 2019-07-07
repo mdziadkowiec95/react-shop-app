@@ -3,7 +3,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { removeFromBasket, changeAmount } from 'actions';
+import { removeFromBasket, changeAmount } from 'actions/basketActions';
 import { MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 import { IoMdTrash } from 'react-icons/io';
 
@@ -11,7 +11,7 @@ const StyledTable = styled(Table)`
   min-height: 50px;
   margin-top: 50px;
   background-color: ${({ theme }) => theme.white};
-  box-shadow: 0 0 10px ${({ theme }) => theme.grey200};
+  box-shadow: 0 0 10px ${({ theme }) => theme.grey200}; 
   border-radius: 10px;
   outline: 0;
 `;

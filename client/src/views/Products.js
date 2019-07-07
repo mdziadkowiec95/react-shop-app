@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Card from 'components/molecules/Card/Card';
 import { fetchProducts } from 'actions/productsActions';
-// import ContentTemplate from 'templates/ContentTemplate';
 import GridTemplate from 'templates/GridTemplate';
 
 class Products extends React.Component {

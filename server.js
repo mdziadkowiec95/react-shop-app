@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 
 const products = require('./routes/api/products');
+const product = require('./routes/api/product');
 const path = require('path');
 
 const app = express();
@@ -32,6 +33,7 @@ mongoose.connect(db)
   .catch(err => console.log(err));
 
 app.use('/api/products', products);
+app.use('/api/product', product);
 
 /** Serve static assets if in production */
 

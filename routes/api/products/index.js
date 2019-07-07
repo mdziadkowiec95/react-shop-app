@@ -5,7 +5,7 @@ const multer = require('multer');
 
 
 // Product model
-const Product = require('../../models/Product');
+const Product = require('../../../models/Product');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -30,7 +30,10 @@ const upload = multer({
     fileSize: 1024 * 1024 * 5
   },
   fileFilter
-}).array('product_images', 3);
+}).fields([
+  { name: 'productMainImage', maxCount: 1 },
+  { name: 'productMoreImages', maxCount: 3 }
+])
 
 /**
  * @route GET api/products
@@ -100,25 +103,16 @@ router.post('', (req, res) => {
       });
     }
 
-    // Everything went fine.
-
-    // res.json({
-    //   name: req.body.name,
-    //   price: req.body.price,
-    //   oldPrice: req.body.oldPrice,
-    //   category: req.body.category,
-    //   images: req.files.map(file => file.path),
-    //   description: req.body.description,
-    //   bestFeatures: req.body.bestFeatures,
-    //   specifications: req.body.specifications
-    // })
+    // Everything went fine
 
     const newProduct = new Product({
       name: req.body.name,
       price: req.body.price,
       oldPrice: req.body.oldPrice,
       category: req.body.category,
-      images: req.files.map(file => file.path),
+      manufacturer: req.body.manufacturer,
+      mainImage: req.files.productMainImage[0].path,
+      allImages: [req.files.productMainImage[0].path, ...req.files.productMoreImages.map(img => img.path)],
       description: JSON.parse(req.body.description),
       bestFeatures: JSON.parse(req.body.bestFeatures),
       specifications: JSON.parse(req.body.specifications)
@@ -129,7 +123,9 @@ router.post('', (req, res) => {
       price: req.body.price,
       oldPrice: req.body.oldPrice,
       category: req.body.category,
-      images: req.files.map(file => file.path),
+      manufacturer: req.body.manufacturer,
+      mainImage: req.files.productMainImage[0].path,
+      allImages: [req.files.productMainImage[0].path, ...req.files.productMoreImages.map(img => img.path)],
       description: req.body.description,
       bestFeatures: req.body.bestFeatures,
       specifications: req.body.specifications
@@ -146,6 +142,9 @@ router.post('', (req, res) => {
             price: product.price,
             oldPrice: product.oldPrice,
             category: product.category,
+            manufacturer: product.manufacturer,
+            mainImage: product.mainImage,
+            allImages: product.allImages,
             images: product.images,
             description: product.description,
             bestFeatures: product.bestFeatures,
@@ -159,12 +158,22 @@ router.post('', (req, res) => {
           err
         });
       });
-
   });
+});
 
-
-
-
+router.get('/:id', (req, res) => {
+  Product.findById(req.params.id)
+    .then((product) => {
+      if (!results) {
+        res.send(404);
+      } else {
+        res.send({
+          status: 'success',
+          product
+        })
+      }
+    })
+    .catch((err) => res.send(404));
 });
 
 /**

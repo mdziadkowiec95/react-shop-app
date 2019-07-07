@@ -16,13 +16,20 @@ const ProductSchema = new Schema({
   },
   oldPrice: {
     type: Number,
-    required: true,
   },
   category: {
     type: String,
     required: true,
   },
-  images: {
+  manufacturer: {
+    type: String,
+    required: true
+  },
+  mainImage: {
+    type: String,
+    required: true,
+  },
+  allImages: {
     type: Array,
     required: true
   },
