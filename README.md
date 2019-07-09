@@ -10,6 +10,8 @@ Status: **IN PROGRESS**
 * [Node.js](https://nodejs.org/en/) - used to create API
 * [MongoDB](https://www.mongodb.com/cloud/atlas) - database
 
+* [styled-components](https://www.styled-components.com/)
+
 ## Getting Started
 
 In order to run and see actual version of this App locally on your computer you need to follow steps below.
