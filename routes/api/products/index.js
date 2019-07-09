@@ -161,20 +161,7 @@ router.post('', (req, res) => {
   });
 });
 
-router.get('/:id', (req, res) => {
-  Product.findById(req.params.id)
-    .then((product) => {
-      if (!results) {
-        res.send(404);
-      } else {
-        res.send({
-          status: 'success',
-          product
-        })
-      }
-    })
-    .catch((err) => res.send(404));
-});
+
 
 /**
  * @route DELETE api/items
