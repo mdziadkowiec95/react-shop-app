@@ -26,6 +26,8 @@ const StyledWrapper = styled.div`
   }
 `;
 
+
+
 const StyledImage = styled.img`
   display: block;
   margin: 0 auto;
@@ -63,7 +65,7 @@ const StyledOnSaleLabel = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  background-color: ${({ theme }) => theme.secondary};
+  background-color: ${({ theme }) => theme.tertiary};
   color: ${({ theme }) => theme.white};
   padding: 10px;
   border-bottom-left-radius: 10px;

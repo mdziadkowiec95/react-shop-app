@@ -1,8 +1,9 @@
 import React from 'react';
+import Heading from 'components/atoms/Heading/Heading';
 
 const Landing = () => (
   <div>
-    <h1>Landing view</h1>
+    <Heading>Landing view</Heading>
   </div>
 );
 

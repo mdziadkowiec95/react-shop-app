@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 const Button = styled.button`
   padding: 10px 20px;
   background-color: ${({ theme, secondary }) => (secondary ? theme.black100 : theme.primary)};
+  background-color: hsla(16, 87%, 62%,1);
+
   color: ${({ theme }) => theme.white};
   box-shadow: 0 0 10px ${({ theme }) => theme.grey200};
   outline: 0;

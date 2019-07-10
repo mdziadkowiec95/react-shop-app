@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import BasketTable from 'components/molecules/BasketTable/BasketTable';
 import BasketSummary from 'components/molecules/BasketSummary/BasketSummary';
 import ContentTemplate from 'templates/ContentTemplate';
+import Heading from 'components/atoms/Heading/Heading';
 
 const Basket = ({ basketItems }) => (
   <ContentTemplate>
     <div>
-      <h2>Your basket</h2>
+      <Heading>Your basket</Heading>
       <BasketTable items={basketItems} />
       <BasketSummary items={basketItems} />
     </div>

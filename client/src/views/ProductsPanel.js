@@ -6,6 +6,7 @@ import SelectField from 'components/atoms/SelectField/SelectField';
 import Button from 'components/atoms/Button/Button';
 import productCategories from 'data/productCategories';
 import ProductAddList from 'components/molecules/ProductAddList/ProductAddList';
+import Heading from 'components/atoms/Heading/Heading';
 
 const StyledForm = styled.form`
   display: flex;
@@ -139,7 +140,7 @@ class ProductsPanel extends Component {
   render() {
     return (
       <div>
-        <h1>Products panel</h1>
+        <Heading>Products panel</Heading>
         <StyledForm action="" method="POST">
           <TextField
             onChangeFn={this.handleFieldChange}

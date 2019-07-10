@@ -17,7 +17,7 @@ const StyledNavItem = styled.li`
 `;
 
 const StyledNavLink = styled(NavLink)`
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.secondary};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   text-decoration: none;
 
@@ -35,10 +35,12 @@ const StyledBasketItem = styled.li`
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.secondary};
 `;
 
-const StyledBasketCounter = styled.span``;
+const StyledBasketCounter = styled.span`
+
+`;
 
 class Navigation extends Component {
   state = {
@@ -87,7 +89,7 @@ class Navigation extends Component {
               >
                 <MdShoppingCart size={30} />
               </StyledNavLink>
-              <StyledBasketCounter> ({basketItemsNumber})</StyledBasketCounter>
+              {basketItemsNumber > 0 && <StyledBasketCounter> ({basketItemsNumber})</StyledBasketCounter>}
             </StyledBasketItem>
           </StyledNavList>
         </nav>
