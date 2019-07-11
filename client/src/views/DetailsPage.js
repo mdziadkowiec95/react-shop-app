@@ -6,18 +6,18 @@ import Heading from 'components/atoms/Heading/Heading';
 import ContentTemplate from 'templates/ContentTemplate';
 import Carousel from 'components/molecules/Carousel/Carousel';
 import SpecificationTable from 'components/molecules/SpecificationTable/SpecificationTable';
-
-
+import OrderBox from 'components/molecules/OrderBox/OrderBox';
+import { respondTo } from 'theme/breakpoints';
 import { specifications as secificationsTEST } from 'placeholderData/productDetails';
 
+const StyledTop = styled.div`
+  ${respondTo.lg`
+    display: flex;  
+  `}
+`;
 
 const StyledWrapper = styled.div`
   padding: 10rem 0;
-`;
-
-const StyledCarousel = styled(Carousel)`
-  width: 300px;
-  /* box-shadow: 0 0 10px ${({ theme }) => theme.grey200};  */
 `;
 
 const StyledCarouselWrapper = styled.div`
@@ -27,6 +27,10 @@ const StyledCarouselWrapper = styled.div`
   /* box-shadow: 0 0 5px ${({ theme }) => theme.grey200};  */
 `;
 
+const StyledOrderBoxWrapper = styled.div`
+  align-self: center; 
+`;
+
 class DetailsPage extends Component {
 
   componentDidMount() {
@@ -34,17 +38,25 @@ class DetailsPage extends Component {
   }
 
   render() {
-    const { _id, name, price, oldPrice, category, manufacturer, allImages, description, bestFeatures, specifications } = this.props;
+    const { _id, name, price, oldPrice, category, manufacturer, mainImage, allImages, description, bestFeatures, specifications } = this.props;
+
+    const orderProps = { _id, name, price, mainImage };
 
     return (
       <ContentTemplate>
         <StyledWrapper>
           <Heading>{name}</Heading>
-          <StyledCarouselWrapper>
-            <Carousel media={{
-              images: allImages
-            }} />
-          </StyledCarouselWrapper>
+          <StyledTop>
+            <StyledCarouselWrapper>
+              <Carousel media={{
+                images: allImages
+              }} />
+            </StyledCarouselWrapper>
+            <StyledOrderBoxWrapper>
+              <OrderBox {...orderProps} />
+            </StyledOrderBoxWrapper>
+          </StyledTop>
+
           <SpecificationTable items={secificationsTEST} />
           {/* {allImages && allImages.map(image => <img src={`/${image}`} />)} */}
         </StyledWrapper>

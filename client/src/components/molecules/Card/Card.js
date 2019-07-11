@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addToBasket } from 'actions/basketActions';
+import { addToBasket as addToBasketAction } from 'actions/basketActions';
 import styled, { css } from 'styled-components';
 import Button from 'components/atoms/Button/Button';
 import addToBasketIcon from 'assets/icons/addToBasketIcon.svg';
@@ -123,10 +123,10 @@ class Card extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addToBasket: (id, name, price, image) => dispatch(addToBasket(id, name, price, image)),
+  addToBasket: (id, name, price, image) => dispatch(addToBasketAction(id, name, price, image)),
 });
 
 export default connect(
   null,
   mapDispatchToProps,
-)(withRouter(Card));
+)(Card);

@@ -1,10 +1,12 @@
-export const addToBasket = (id, name, price, image) => ({
+export const addToBasket = (id, name, price, image, count = 1, pageType) => ({
   type: 'ADD_TO_BASKET',
   payload: {
     id,
     name,
     price,
     image,
+    count,
+    pageType
   },
 });
 

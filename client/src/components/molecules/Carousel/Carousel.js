@@ -28,6 +28,7 @@ const StyledCarouselNavBtn = styled.button`
     flex: 1;
     height: 150px; 
     margin: 0 .5rem;
+    border: 1px solid ${({ theme }) => theme.grey300};
     border-radius: 20px;
     background: ${({ imageUrl }) => `url(/${imageUrl})`} no-repeat center / 90%; 
     cursor: pointer;

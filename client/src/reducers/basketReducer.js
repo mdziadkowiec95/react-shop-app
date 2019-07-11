@@ -38,32 +38,38 @@ export default (state = initialState, action) => {
       const targetIndex = state.items.findIndex(item => item.id === action.payload.id);
 
       if (targetIndex >= 0 && state.items.length > 0) {
+        if (action.payload.pageType === 'productPage') {
+          return {
+            ...state,
+            items: state.items.map(item => {
+              if (item.id === action.payload.id) {
+                return {
+                  ...item,
+                  count: action.payload.count
+                };
+              }
+              return item;
+            }),
+          };
+        } else {
+          return state;
+        }
+
+      } else {
         return {
           ...state,
-          items: state.items.map((item, index) => {
-            if (index === targetIndex) {
-              return { ...item, count: item.count + 1 };
-            }
-            return {
-              ...item,
-              count: item.count,
-            };
-          }),
+          items: [
+            ...state.items,
+            {
+              id: action.payload.id,
+              name: action.payload.name,
+              price: action.payload.price,
+              image: action.payload.image,
+              count: action.payload.count,
+            },
+          ],
         };
       }
-      return {
-        ...state,
-        items: [
-          ...state.items,
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-            price: action.payload.price,
-            image: action.payload.image,
-            count: 1,
-          },
-        ],
-      };
 
     case 'REMOVE_FROM_BASKET':
       return {
